@@ -1,0 +1,41 @@
+{% extends "product/base.html" %}
+{% load staticfiles %}
+{% block content %}
+		<!------------------------ Menu Tree -------------------->
+		<div class="alert alert-info" role="alert">
+			<h3><a href="{% url 'product-home' %}" class="alert-link">Categories/</a><a href="{% url 'category-list' category.slug %}">{{ category_name }}/</a></h3>	
+		</div> 
+        <p>{{ category.description }}</p>       <!-------Category Description ------------------>    
+        
+		{% if category %}
+			{% if posts %}
+				{% for post in posts %}
+ <!----- Categories product listing ----------->
+				<div class="media">
+					<div class="media-left">
+						<a href="{% url 'django.views.static.serve' post.photo %}">
+						<img src="/media/{{ post.photo }}" alt="{{ post.name }}" class="media-object" width="122" height="66">  <!----Produc Photo---->
+						</a>
+					</div>
+					
+				<div class="media-body">
+					<h4 class="media-heading"><a href="{% url 'product-detail' post.slug %}">{{ post.name }}&nbsp;&nbsp;</a>
+						{% if post.for_sale == 'Y' %}
+							<span class="label label-danger">FOR SALE</span>
+						{% endif %}
+					</h4>
+						<p>{{post.description}}</p>    <!----Produc Description ---->
+				</div>
+			</div>
+
+
+            {% endfor %}
+        {% else %}
+			<strong>no posts currently in category</strong>
+        {% endif %}
+    {% else %}
+		the specified category {{ category_name }} does not exist
+    {% endif %}
+
+{%endblock %}
+

@@ -1,0 +1,12 @@
+{% if cats %}
+    <div class="list-group">
+       
+    {% for c in cats %}
+        <button type="button" class="list-group-item"><a href="/product/category/{{c.slug }}">{{ c.name }}</a></button>
+    {% endfor %}
+
+{% else %}
+    <strong >There are no category present.</strong>
+
+    </div>
+{% endif %}

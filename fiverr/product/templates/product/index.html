@@ -1,0 +1,25 @@
+{% extends "product/base.html" %}
+{% load staticfiles %}
+{% block content %}
+	<!------------------------ Menu Tree -------------------->
+	<div class="alert alert-info" role="alert">
+		<h3><a href="">Categories/</a></h3>
+	</div>
+	
+{% for i in categories %}
+							<!---------- Category List ---------->
+			<div class="media">
+				<div class="media-left">
+					<a href="{% url 'django.views.static.serve' i.photo %}">
+						<img src="media/{{i.photo }}" alt="..." class="media-object" width="177" height="116">
+					</a>
+				</div>
+				
+				<div class="media-body">
+					<h4 class="media-heading"><a href="{% url 'category-list' i.slug %}">{{ i.name }}</a></h4>
+						<p>{{i.description}}</p>
+				</div>
+			</div>
+		{% endfor %}
+{% endblock %}
+

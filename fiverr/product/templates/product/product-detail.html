@@ -1,0 +1,41 @@
+{% extends "product/base.html" %}
+{% load staticfiles %}
+{% block content %}
+	
+{% for i in items %}
+					<!------------------------ Menu Tree -------------------->
+		<div class="alert alert-info" role="alert">
+			<h3><a href="{% url 'product-home' %}">Categories/</a><a href="{% url 'category-list' i.categories.slug %}">{{ i.categories }}/</a>{{ i.name }}</h3>
+		</div>
+					<!------------------------Product Detail page ------------>
+
+			<div class="media">
+				<h3 class="media-heading"><a href="{% url 'product-detail' i.slug %}">{{ i.name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+					{% if i.for_sale == 'Y' %}
+						<span class="label label-danger">FOR SALE</span>
+					{% endif %}
+				</h3>
+				
+				<div class="media-left">
+					<a href="{% url 'django.views.static.serve' i.photo %}">
+						<img src="/media/{{i.photo }}" alt="..." class="media-object" width="276" height="174">
+					</a>
+				</div>
+				
+				<div class="media-body">					
+						<p>{{i.description}}</p>												
+						<h4><b>Price:</b><span class="label label-success">{{ i.price }}<span class="glyphicon glyphicon-usd" aria-hidden="true"></span></span></h4>
+				</div>
+			</div>
+		{% endfor %}
+{% endblock %}
+
+
+
+
+
+
+
+<!------------------------------------------------------>
+
+
